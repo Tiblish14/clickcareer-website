@@ -1,42 +1,1133 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ClickCareer | B.Tech Interview Preparation, Industry English, Reasoning & Excel Skills</title>
-    <meta name="description" content="ClickCareer helps B.Tech students crack interviews with industry-specific English, reasoning, Excel for GST & accounting, and job-ready skills. Learn practical skills and connect via WhatsApp for enrollment." />
-    <meta name="keywords" content="B.Tech interview preparation, industry specific English for engineers, reasoning for B.Tech students, Excel for GST, Excel for accounting, job ready skills for engineers, placement preparation India, ClickCareer" />
-    
-    <!-- Open Graph (Static default for WhatsApp/LinkedIn) -->
-    <meta property="og:title" content="ClickCareer | B.Tech Interview Preparation & Job Skills" />
-    <meta property="og:description" content="Master industry-specific English, Reasoning, and Excel to crack your placements and get hired faster." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://clickcareer.in" />
-    <!-- TODO: Add actual image URL once deployed -->
-    <meta property="og:image" content="https://clickcareer.in/og-image.jpg" />
-    
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "ClickCareer",
-      "url": "https://clickcareer.in"
-    }
-    </script>
 
-    <!-- Google Analytics (Placeholder) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-YOUR_MEASUREMENT_ID"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClickCareer | Master IT, GST, English & Aptitude Live</title>
+    <meta name="description"
+        content="Accelerate your Career with India's most premium, outcome-driven learning platform. Master IT, GST, English & Aptitude live directly from industry professionals.">
+
+    <!-- Open Graph / Social Sharing Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="ClickCareer | Master IT, GST, English & Aptitude Live">
+    <meta property="og:description"
+        content="Accelerate your Career with India's most premium, outcome-driven learning platform. Master IT, GST, English & Aptitude live directly from industry professionals.">
+    <meta property="og:image"
+        content="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80">
+    <meta property="og:url" id="og-url" content="https://www.clickcareer.in/">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ClickCareer | Master IT, GST, English & Aptitude Live">
+    <meta name="twitter:description"
+        content="Accelerate your Career with India's most premium, outcome-driven learning platform. Master IT, GST, English & Aptitude live directly from industry professionals.">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Hide scrollbar for tabs */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Custom animations */
+        @keyframes customPing {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            75%,
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .animate-custom-ping {
+            animation: customPing 1s cubic-bezier(0, 0, 0.2, 1) forwards;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 font-sans text-slate-900 pb-16 md:pb-0 overflow-x-hidden">
+
+    <!-- 1. NAVIGATION & HEADER -->
+    <header
+        class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <span
+                        class="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
+                        ClickCareer.
+                    </span>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8 items-center font-medium text-sm text-slate-700">
+                    <div class="relative group cursor-pointer h-16 flex items-center">
+                        <span class="hover:text-blue-600 flex items-center">Courses <i data-lucide="chevron-down"
+                                class="ml-1 w-4 h-4"></i></span>
+                        <div class="absolute top-16 left-0 w-48 bg-white border border-slate-200 shadow-xl rounded-b-xl py-2 hidden group-hover:block transition-all"
+                            id="desktop-course-dropdown">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <a href="#about" class="hover:text-blue-600">Who Are We</a>
+                    <a href="#blogs" class="hover:text-blue-600">Blogs</a>
+                    <button onclick="openModal('partner-modal')"
+                        class="hover:text-blue-600 text-orange-500 font-semibold">Partner for Training</button>
+                </nav>
+
+                <!-- Desktop Actions -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <button onclick="openModal('auth-modal')"
+                        class="flex items-center text-slate-700 hover:text-blue-600 font-medium text-sm">
+                        <i data-lucide="user" class="mr-1.5 w-4 h-4"></i> Sign In
+                    </button>
+                    <button onclick="openModal('cart-modal')"
+                        class="relative text-slate-700 hover:text-blue-600 transition-colors">
+                        <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                        <span id="cart-count-desktop"
+                            class="hidden absolute -top-2 -right-2 bg-orange-500 text-white text-[10px] font-bold h-5 w-5 rounded-full items-center justify-center animate-bounce">0</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center space-x-4">
+                    <button onclick="openModal('cart-modal')" class="relative text-slate-700">
+                        <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                        <span id="cart-count-mobile"
+                            class="hidden absolute -top-2 -right-2 bg-orange-500 text-white text-[10px] font-bold h-5 w-5 rounded-full items-center justify-center">0</span>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="text-slate-700">
+                        <i data-lucide="menu" id="mobile-menu-icon" class="w-7 h-7"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu"
+            class="hidden md:hidden bg-white border-t border-slate-200 py-4 px-4 shadow-lg absolute w-full">
+            <div class="flex flex-col space-y-4 font-medium text-slate-700">
+                <a href="#courses" onclick="toggleMobileMenu()">Courses</a>
+                <a href="#about" onclick="toggleMobileMenu()">Who Are We</a>
+                <a href="#blogs" onclick="toggleMobileMenu()">Blogs</a>
+                <div class="h-px bg-slate-100 my-2"></div>
+                <button onclick="openModal('auth-modal'); toggleMobileMenu();" class="text-left flex items-center">
+                    <i data-lucide="user" class="mr-2 w-4 h-4"></i> Sign In / Register
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center">
+        <div class="lg:w-1/2 space-y-8 pr-0 lg:pr-12 text-center lg:text-left">
+            <div
+                class="inline-flex items-center px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-sm font-semibold mb-4">
+                <span class="animate-pulse h-2 w-2 bg-blue-600 rounded-full mr-2"></span>
+                Next Live Batch in 3 Days
+            </div>
+            <h1 class="text-5xl lg:text-6xl font-black leading-tight text-slate-900 tracking-tight">
+                Accelerate your Career. <br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600"
+                    id="typing-text">Master IT Skills live</span>
+                <span class="animate-ping text-blue-600 font-normal">|</span>
+            </h1>
+            <p class="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0">
+                India's most premium, outcome-driven learning platform. Join the elite 1% who learn directly from
+                industry professionals.
+            </p>
+
+            <!-- Value Props -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <div class="flex items-center bg-white border border-slate-200 px-4 py-3 rounded-xl shadow-sm">
+                    <i data-lucide="check-circle" class="text-green-500 mr-3 w-6 h-6"></i>
+                    <div class="text-left text-sm font-semibold">True Mentorship<br /><span
+                            class="text-xs text-slate-500 font-normal">Live doubt clearing</span></div>
+                </div>
+                <div class="flex items-center bg-white border border-slate-200 px-4 py-3 rounded-xl shadow-sm">
+                    <i data-lucide="shield" class="text-blue-500 mr-3 w-6 h-6"></i>
+                    <div class="text-left text-sm font-semibold">Max 15 Students<br /><span
+                            class="text-xs text-slate-500 font-normal">Personal attention</span></div>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                <button onclick="document.getElementById('courses').scrollIntoView({behavior: 'smooth'})"
+                    class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-700 transition shadow-lg shadow-blue-600/30">
+                    Explore Courses
+                </button>
+                <button onclick="openModal('demo-modal')"
+                    class="bg-white text-slate-800 border-2 border-slate-200 px-8 py-4 rounded-full font-bold text-lg hover:border-slate-300 hover:bg-slate-50 transition flex items-center justify-center">
+                    <i data-lucide="play" class="mr-2 h-5 w-5 text-orange-500"></i> Book Free 15-Min Demo
+                </button>
+            </div>
+        </div>
+
+        <!-- Hero Visual -->
+        <div class="lg:w-1/2 mt-16 lg:mt-0 relative">
+            <div
+                class="absolute inset-0 bg-gradient-to-tr from-blue-100 to-orange-50 rounded-[3rem] transform rotate-3 scale-105">
+            </div>
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Students Learning"
+                class="relative rounded-[3rem] shadow-2xl object-cover h-[500px] w-full border-8 border-white" />
+
+            <!-- Trust Badge overlay -->
+            <div class="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center animate-bounce"
+                style="animation-duration: 3s;">
+                <i data-lucide="star" class="text-yellow-400 fill-current h-10 w-10 mr-3"></i>
+                <div>
+                    <p class="font-bold text-slate-900">4.9/5 Rating</p>
+                    <p class="text-xs text-slate-500">from 10,000+ students</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. INTERACTIVE COURSE CATALOG -->
+    <section id="courses" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900">Elevate Your Expertise</h2>
+                <p class="text-slate-600 mt-4 text-lg">Select a category below to explore our live, cohort-based
+                    courses.</p>
+            </div>
+
+            <!-- Tabs -->
+            <div id="course-tabs" class="flex overflow-x-auto hide-scrollbar space-x-2 md:justify-center mb-10 pb-4">
+                <!-- Populated by JS -->
+            </div>
+
+            <!-- Course Grid -->
+            <div id="course-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. WHO ARE WE & TESTIMONIALS -->
+    <section id="about" class="py-20 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-5xl font-black mb-6">Learn from those who actually do it.</h2>
+                    <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                        We aren't just teachers; we are industry professionals. Our mentors have 10+ years of active
+                        experience in top tech firms, Big 4 auditing companies, and government sectors.
+                    </p>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="bg-blue-600/20 p-3 rounded-xl mr-4"><i data-lucide="shield"
+                                    class="text-blue-400"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl">Verified Industry Experts</h4>
+                                <p class="text-slate-400 mt-1">Every curriculum is vetted by hiring managers.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="bg-orange-500/20 p-3 rounded-xl mr-4"><i data-lucide="clock"
+                                    class="text-orange-400"></i></div>
+                            <div>
+                                <h4 class="font-bold text-xl">Up-to-Date Syllabi</h4>
+                                <p class="text-slate-400 mt-1">We teach what's relevant today, not 5 years ago.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonials -->
+                <div class="relative">
+                    <div class="absolute inset-0 bg-blue-600 rounded-3xl transform rotate-3"></div>
+                    <div class="relative bg-slate-800 p-8 rounded-3xl shadow-2xl border border-slate-700">
+                        <h3 class="text-2xl font-bold mb-6 text-white border-b border-slate-700 pb-4">Student Success
+                            Stories</h3>
+                        <div class="space-y-6">
+                            <div
+                                class="bg-slate-700/50 p-4 rounded-xl border border-slate-600 hover:bg-slate-700 transition">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-bold text-blue-300">Rahul M.</span>
+                                    <span
+                                        class="text-xs font-semibold bg-green-500/20 text-green-400 px-2 py-1 rounded-md">Cleared
+                                        SSC CGL</span>
+                                </div>
+                                <p class="text-sm text-slate-300 italic">"The Aptitude batches are pure gold. The
+                                    15-student limit meant all my doubts were solved instantly."</p>
+                            </div>
+                            <div
+                                class="bg-slate-700/50 p-4 rounded-xl border border-slate-600 hover:bg-slate-700 transition">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-bold text-blue-300">Sneha P.</span>
+                                    <span
+                                        class="text-xs font-semibold bg-green-500/20 text-green-400 px-2 py-1 rounded-md">Placed
+                                        as Data Analyst</span>
+                                </div>
+                                <p class="text-sm text-slate-300 italic">"IT skills course didn't just teach code, it
+                                    taught problem-solving. Got placed in 3 months!"</p>
+                            </div>
+                            <div
+                                class="bg-slate-700/50 p-4 rounded-xl border border-slate-600 hover:bg-slate-700 transition">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="font-bold text-blue-300">Amit K.</span>
+                                    <span
+                                        class="text-xs font-semibold bg-green-500/20 text-green-400 px-2 py-1 rounded-md">CA
+                                        Inter Student</span>
+                                </div>
+                                <p class="text-sm text-slate-300 italic">"The GST course is exactly what practical
+                                    accounting looks like. The Free Excel bonus saved my articleship."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. & 8. BLOG SYSTEM -->
+    <section id="blogs" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-black text-slate-900">Expert Resources</h2>
+                    <p class="text-slate-600 mt-2 text-lg">Explore our library of 40+ expert articles.</p>
+                </div>
+                <div class="relative w-full md:w-72">
+                    <i data-lucide="search" class="absolute left-3 top-3 text-slate-400 w-5 h-5"></i>
+                    <input type="text" id="blog-search" placeholder="Search topics..." onkeyup="renderBlogs()"
+                        class="w-full pl-10 pr-4 py-2.5 rounded-full border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+                </div>
+            </div>
+
+            <div id="blog-container" class="space-y-12">
+                <!-- Populated by JS -->
+            </div>
+
+            <div id="blog-more-btn" class="text-center mt-10 hidden">
+                <button onclick="document.getElementById('blog-search').focus()"
+                    class="text-blue-600 font-bold hover:underline">Search for more resources <i
+                        data-lucide="arrow-right" class="inline w-4 h-4"></i> </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8.4 FAQ SECTION -->
+    <section class="py-20 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl md:text-4xl font-black text-slate-900 text-center mb-10">Frequently Asked Questions</h2>
+            <div class="space-y-4" id="faq-container">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12">
+            <div class="col-span-1 md:col-span-1">
+                <span class="text-2xl font-black text-white mb-4 block">ClickCareer.</span>
+                <p class="text-sm mb-6">Empowering students and professionals with high-performance, outcome-based live
+                    learning. Build your future today.</p>
+                <div class="flex space-x-4">
+                    <div
+                        class="w-8 h-8 rounded-full bg-slate-800 hover:bg-blue-600 transition cursor-pointer flex items-center justify-center">
+                        In</div>
+                    <div
+                        class="w-8 h-8 rounded-full bg-slate-800 hover:bg-blue-600 transition cursor-pointer flex items-center justify-center">
+                        Tw</div>
+                    <div
+                        class="w-8 h-8 rounded-full bg-slate-800 hover:bg-blue-600 transition cursor-pointer flex items-center justify-center">
+                        Fb</div>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#about" class="hover:text-blue-400">About Us</a></li>
+                    <li><a href="#courses" class="hover:text-blue-400">All Courses</a></li>
+                    <li><a href="#blogs" class="hover:text-blue-400">Blog & Resources</a></li>
+                    <li><button onclick="openModal('partner-modal')" class="hover:text-blue-400">Partner for
+                            Training</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Legal</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-blue-400">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-blue-400">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-blue-400">Refund Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4">Join Newsletter</h4>
+                <p class="text-sm mb-4">Get the latest career tips and batch updates.</p>
+                <div class="flex">
+                    <input type="email" placeholder="Your email"
+                        class="bg-slate-800 border-none rounded-l-lg px-4 py-2 w-full focus:outline-none text-white text-sm" />
+                    <button
+                        class="bg-blue-600 text-white px-4 py-2 rounded-r-lg font-semibold hover:bg-blue-700 text-sm">Subscribe</button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-slate-800 text-sm text-center text-slate-500">
+            © <span id="current-year"></span> ClickCareer EdTech Platform. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/917903817049" target="_blank" rel="noreferrer"
+        class="fixed bottom-20 md:bottom-6 left-6 bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 transition-transform z-40 group flex items-center">
+        <i data-lucide="message-circle" class="w-7 h-7"></i>
+        <span
+            class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 ease-in-out whitespace-nowrap ml-0 group-hover:ml-3 font-semibold">Chat
+            with Us</span>
+    </a>
+
+    <!-- STICKY BOTTOM NAV (Mobile Only) -->
+    <div
+        class="md:hidden fixed bottom-0 w-full bg-white border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-40 flex px-4 py-3 justify-between items-center pb-safe">
+        <select id="mobile-category-select"
+            onchange="switchTab(this.value); window.scrollTo(0, document.getElementById('courses').offsetTop - 80)"
+            class="bg-slate-100 border-none rounded-lg px-3 py-2 text-sm font-semibold text-slate-800 focus:ring-0 max-w-[50%]">
+            <!-- Populated by JS -->
+        </select>
+        <button onclick="openModal('cart-modal')"
+            class="bg-slate-900 text-white px-6 py-2.5 rounded-lg font-bold text-sm shadow-md flex items-center">
+            GO TO CART <span id="sticky-cart-count" class="ml-1"></span>
+        </button>
+    </div>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- Cart Modal -->
+    <div id="cart-modal"
+        class="fixed inset-0 bg-slate-900/50 z-[60] backdrop-blur-sm transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div id="cart-panel"
+            class="absolute right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl transform transition-transform duration-300 flex flex-col translate-x-full">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center">
+                <h2 class="text-2xl font-black flex items-center"><i data-lucide="shopping-cart"
+                        class="mr-3 text-blue-600 w-6 h-6"></i> Your Cart</h2>
+                <button onclick="closeModal('cart-modal')"
+                    class="text-slate-400 hover:text-slate-800 bg-slate-100 rounded-full p-2"><i data-lucide="x"
+                        class="w-5 h-5"></i></button>
+            </div>
+
+            <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Populated by JS -->
+            </div>
+
+            <div id="cart-footer"
+                class="p-6 bg-white border-t border-slate-100 shadow-[0_-10px_15px_-3px_rgba(0,0,0,0.05)] hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <span class="text-slate-600 font-medium">Subtotal (<span id="cart-total-items">0</span>
+                        items)</span>
+                    <span class="text-2xl font-black text-slate-900">₹<span id="cart-total-price">0</span></span>
+                </div>
+                <button onclick="simulateCheckout()"
+                    class="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-xl font-bold text-lg shadow-lg transition flex justify-center items-center">
+                    Secure Checkout <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                </button>
+                <p class="text-center text-xs text-slate-400 mt-4 flex items-center justify-center"><i
+                        data-lucide="shield" class="mr-1 w-3 h-3"></i> SSL Encrypted Payment</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal"
+        class="fixed inset-0 bg-slate-900/60 z-[70] backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden relative">
+            <button onclick="closeModal('auth-modal')"
+                class="absolute top-4 right-4 text-slate-400 hover:text-slate-800"><i data-lucide="x"
+                    class="w-6 h-6"></i></button>
+            <div class="p-8">
+                <h2 id="auth-title" class="text-3xl font-black mb-2">Welcome Back</h2>
+                <p id="auth-desc" class="text-slate-500 mb-8">Enter your details to access your courses.</p>
+
+                <div class="space-y-4">
+                    <input type="text" id="auth-name" placeholder="Full Name"
+                        class="hidden w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+                    <input type="email" placeholder="Email Address"
+                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+                    <input type="password" placeholder="Password"
+                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+                    <button id="auth-submit"
+                        class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl shadow-md hover:bg-blue-700 transition">
+                        Sign In
+                    </button>
+                </div>
+
+                <div class="mt-6 text-center text-sm font-medium text-slate-600">
+                    <span id="auth-switch-text">Don't have an account? </span>
+                    <button onclick="toggleAuthMode()" id="auth-switch-btn" class="text-blue-600 hover:underline">Sign
+                        up here</button>
+                </div>
+            </div>
+            <div class="bg-slate-50 p-6 text-center border-t border-slate-100">
+                <p class="text-xs text-slate-500">By continuing, you agree to ClickCareer's Terms of Service and Privacy
+                    Policy.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Modal -->
+    <div id="demo-modal"
+        class="fixed inset-0 bg-slate-900/60 z-[70] backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden relative">
+            <button onclick="closeModal('demo-modal')"
+                class="absolute top-4 right-4 text-slate-400 hover:text-slate-800"><i data-lucide="x"
+                    class="w-6 h-6"></i></button>
+            <div class="p-8">
+                <h2 class="text-3xl font-black mb-2">Book Free Demo</h2>
+                <p class="text-slate-500 mb-6">Schedule your 15-minute free demo session.</p>
+
+                <form onsubmit="handleDemoSubmit(event)" class="space-y-4">
+                    <input required type="text" placeholder="Full Name"
+                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+                    <input required type="tel" placeholder="Mobile Number"
+                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+                    <input required type="email" placeholder="Email Address"
+                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+                    <div class="relative">
+                        <select id="demo-subject-select" required
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none text-slate-700 bg-white appearance-none">
+                            <option value="" disabled selected>Select Subject for Demo</option>
+                            <!-- Populated by JS -->
+                        </select>
+                        <i data-lucide="chevron-down"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none w-5 h-5"></i>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-orange-500 text-white font-bold py-3 rounded-xl shadow-md hover:bg-orange-600 transition mt-4">
+                        Request Demo Session
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Partner Modal -->
+    <div id="partner-modal"
+        class="fixed inset-0 bg-slate-900/60 z-[70] backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div class="bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden relative">
+            <button onclick="closeModal('partner-modal')"
+                class="absolute top-4 right-4 text-slate-400 hover:text-slate-800"><i data-lucide="x"
+                    class="w-6 h-6"></i></button>
+            <div class="p-8">
+                <h2 class="text-3xl font-black mb-2">Partner with Us</h2>
+                <p class="text-slate-500 mb-6">Let's collaborate to upskill your students or team.</p>
+
+                <form onsubmit="handlePartnerSubmit(event)" class="space-y-4">
+                    <input required type="text" placeholder="Organization/College Name"
+                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+                    <input required type="text" placeholder="Contact Person"
+                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+                    <input required type="tel" placeholder="Mobile Number"
+                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+                    <input required type="email" placeholder="Official Email Address"
+                        class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+                    <div class="relative">
+                        <select required
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none text-slate-700 bg-white appearance-none">
+                            <option value="" disabled selected>Partnership Type</option>
+                            <option value="College Training">College Campus Training</option>
+                            <option value="Corporate Training">Corporate Team Upskilling</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <i data-lucide="chevron-down"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none w-5 h-5"></i>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-blue-600 text-white font-bold py-3 rounded-xl shadow-md hover:bg-blue-700 transition mt-4">
+                        Submit Request
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Blog Reader Modal -->
+    <div id="blog-modal"
+        class="fixed inset-0 bg-white z-[80] overflow-y-auto transition-opacity duration-300 opacity-0 pointer-events-none">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 py-12 relative">
+            <!-- Blog Modal Top Bar: Close + Share -->
+            <div class="fixed top-6 right-6 md:absolute md:-right-12 md:top-12 z-50 flex flex-col gap-3">
+                <button onclick="closeModal('blog-modal')"
+                    class="bg-slate-100 p-3 rounded-full hover:bg-slate-200 text-slate-600 transition">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                <button onclick="shareBlog()" id="blog-share-btn"
+                    class="bg-blue-600 p-3 rounded-full hover:bg-blue-700 text-white transition shadow-lg group relative"
+                    title="Share this article">
+                    <i data-lucide="share-2" class="w-6 h-6"></i>
+                    <span
+                        class="absolute right-full mr-3 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">Share
+                        Article</span>
+                </button>
+            </div>
+
+            <span id="blog-modal-cat"
+                class="text-sm font-bold text-blue-600 bg-blue-50 px-3 py-1 rounded-md mb-6 inline-block">Category</span>
+            <h1 id="blog-modal-title" class="text-4xl md:text-5xl font-black text-slate-900 mb-6 leading-tight">Title
+            </h1>
+
+            <div class="flex items-center space-x-4 mb-10 pb-10 border-b border-slate-200">
+                <div id="blog-modal-avatar"
+                    class="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl">
+                    A
+                </div>
+                <div>
+                    <p id="blog-modal-author" class="font-bold text-slate-900">Author</p>
+                    <p class="text-sm text-slate-500"><span id="blog-modal-date">Date</span> • <span
+                            id="blog-modal-time">Time</span></p>
+                </div>
+            </div>
+
+            <div class="prose prose-lg prose-blue max-w-none text-slate-700">
+                <p class="lead text-xl text-slate-600 font-medium mb-8">This article explores the critical aspects of
+                    mastering <span id="blog-modal-cat-text">this</span>, offering insights straight from industry
+                    trenches.</p>
+                <div id="blog-modal-content" class="mb-6 space-y-6"></div>
+                <h3 class="text-2xl font-bold mt-10 mb-4">Why this matters in 2026</h3>
+                <p class="mb-6">The landscape is changing rapidly. What worked five years ago is now obsolete. By
+                    adopting these strategies, professionals can ensure they remain at the top of their game. Our
+                    dedicated live batches delve even deeper into these concepts.</p>
+
+                <div class="bg-orange-50 p-8 rounded-2xl border border-orange-100 mt-12 text-center">
+                    <h4 class="text-xl font-bold text-slate-900 mb-2">Want to master this live?</h4>
+                    <p class="text-slate-600 mb-6">Join our upcoming 15-student cohort with expert mentorship.</p>
+                    <button onclick="closeModal('blog-modal'); document.getElementById('courses').scrollIntoView();"
+                        class="bg-orange-500 text-white font-bold py-3 px-8 rounded-full hover:bg-orange-600 transition shadow-lg">View
+                        Live Courses</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ==================== JAVASCRIPT LOGIC ==================== -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-YOUR_MEASUREMENT_ID');
+        // --- DATA ---
+        const CATEGORIES = ["IT Skills", "Quantitative Aptitude", "English", "Reasoning", "GST"];
+
+        const COURSES = [
+            { id: 1, title: "MS Office Mastery (Word, Excel, PPT)", category: "IT Skills", target: "Students & Professionals", price: 2999, originalPrice: 6000, tags: ["Essential", "Best Seller"] },
+            { id: 2, title: "AI Prompt Engineering", category: "IT Skills", target: "Future-Proof Careers", price: 3499, originalPrice: 7000, tags: ["Trending", "Limited Seats"] },
+            { id: 8, title: "Digital Marketing & Social Media", category: "IT Skills", target: "Entrepreneurs & Creators", price: 4999, originalPrice: 10000, tags: ["Live Mentor"] },
+            { id: 9, title: "Safe Digital Practices & Cyber Security", category: "IT Skills", target: "Everyone", price: 1999, originalPrice: 4000, tags: [] },
+            { id: 10, title: "Quant for Campus Placements", category: "Quantitative Aptitude", target: "B.Tech Students", price: 3999, originalPrice: 8000, tags: ["TCS, Wipro, Infosys"] },
+            { id: 11, title: "SSC CGL Quant Mastery", category: "Quantitative Aptitude", target: "SSC Aspirants", price: 4999, originalPrice: 10000, tags: ["Taught by AIR 9", "Best Seller"] },
+            { id: 12, title: "Logical Reasoning for Tech MNCs", category: "Reasoning", target: "B.Tech Students", price: 2999, originalPrice: 6000, tags: ["Campus Drives"] },
+            { id: 13, title: "Target SSC Reasoning Pro", category: "Reasoning", target: "SSC Aspirants", price: 3499, originalPrice: 7000, tags: ["Taught by AIR 9"] },
+            { id: 4, title: "Spoken English Pro", category: "English", target: "Professionals & Students", price: 2999, originalPrice: 5000, tags: ["Interactive"] },
+            { id: 14, title: "Grammar & Vocab for Exams", category: "English", target: "SSC / Bank PO", price: 2499, originalPrice: 5000, tags: ["Taught by AIR 9"] },
+            { id: 15, title: "Advanced Vocab for Professionals", category: "English", target: "Corporate Professionals", price: 3499, originalPrice: 7000, tags: ["Business Focus"] },
+            { id: 6, title: "Mastering GST 2026", category: "GST", target: "CA/CS & Accountants", price: 6999, originalPrice: 15000, isPremium: true, bonus: "Free Excel for Audit Module", tags: ["Premium"] },
+            { id: 7, title: "B.Tech Campus Placement Combo", category: "Quantitative Aptitude", target: "B.Tech Students", price: 5999, originalPrice: 14000, isBundle: true, tags: ["Bundle Offer"] },
+        ];
+
+        const BLOGS = Array.from({ length: 40 }).map((_, i) => {
+            const course = COURSES[i % COURSES.length];
+            return {
+                id: i + 1,
+                title: `Ultimate Guide to ${course.title} - Part ${Math.floor(i / COURSES.length) + 1}`,
+                category: course.title,
+                author: "Industry Expert",
+                date: "Apr 2026",
+                readTime: `${Math.floor(Math.random() * 5) + 3} min read`,
+                content: `This is a comprehensive, full-length expert article on ${course.title}. It covers advanced techniques, practical applications, and industry secrets gathered from over 10 years of experience. \n\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.`
+            };
+        });
+
+        const FAQS = [
+            { q: "How do live classes work?", a: "Classes are conducted on our HD platform. You can ask doubts directly using voice or chat. Maximum 15 students per batch." },
+            { q: "Do I get lifetime access?", a: "Yes, all recorded sessions and study materials are available to you for a lifetime." },
+            { q: "What is the refund policy?", a: "We offer a 7-day money-back guarantee. If you are not satisfied, we refund 100% no questions asked." },
+            { q: "Are the mentors real industry professionals?", a: "Absolutely. Our mentors have 10+ years of experience working in top MNCs and Big 4 firms." }
+        ];
+
+        // --- STATE ---
+        let cart = [];
+        try {
+            const saved = localStorage.getItem('clickcareer_cart');
+            if (saved) cart = JSON.parse(saved);
+        } catch (e) { }
+
+        let activeTab = CATEGORIES[0];
+        let authMode = 'login';
+        let isMobileMenuOpen = false;
+
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Set canonical OG URL
+            const ogUrlMeta = document.getElementById('og-url');
+            if (ogUrlMeta) ogUrlMeta.setAttribute('content', window.location.href);
+
+            setupDropdowns();
+            renderTabs();
+            renderCourses();
+            renderBlogs();
+            renderFAQs();
+            updateCartUI();
+            startTypingEffect();
+            lucide.createIcons();
+
+            // --- DEEP-LINK: Open blog from URL hash ---
+            handleHashRoute();
+        });
+
+        // Handle hash-based routing for blog deep links
+        function handleHashRoute() {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#blog-')) {
+                const blogId = parseInt(hash.replace('#blog-', ''), 10);
+                if (!isNaN(blogId)) {
+                    // Small delay to ensure DOM is ready
+                    setTimeout(() => openBlog(blogId, true), 300);
+                }
+            }
+        }
+
+        // Listen for browser back/forward navigation
+        window.addEventListener('popstate', () => {
+            const hash = window.location.hash;
+            if (hash && hash.startsWith('#blog-')) {
+                const blogId = parseInt(hash.replace('#blog-', ''), 10);
+                if (!isNaN(blogId)) openBlog(blogId, true);
+            } else {
+                // If hash is cleared (user hit back), close the blog modal
+                closeModal('blog-modal');
+            }
+        });
+
+        // --- UI RENDERERS ---
+        function setupDropdowns() {
+            // Desktop Header Dropdown
+            const headerDropdown = document.getElementById('desktop-course-dropdown');
+            headerDropdown.innerHTML = CATEGORIES.map(cat =>
+                `<div onclick="switchTab('${cat}'); document.getElementById('courses').scrollIntoView();" 
+                      class="px-4 py-2 hover:bg-blue-50 hover:text-blue-600 cursor-pointer">${cat}</div>`
+            ).join('');
+
+            // Mobile Nav Select & Demo Select
+            const mobileSelect = document.getElementById('mobile-category-select');
+            const demoSelect = document.getElementById('demo-subject-select');
+            CATEGORIES.forEach(cat => {
+                mobileSelect.innerHTML += `<option value="${cat}">${cat}</option>`;
+                demoSelect.innerHTML += `<option value="${cat}">${cat}</option>`;
+            });
+        }
+
+        function renderTabs() {
+            const tabsContainer = document.getElementById('course-tabs');
+            tabsContainer.innerHTML = CATEGORIES.map(cat => `
+                <button onclick="switchTab('${cat}')"
+                    class="px-6 py-3 rounded-full font-semibold whitespace-nowrap transition-all duration-200 
+                    ${activeTab === cat ? 'bg-slate-900 text-white shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}">
+                    ${cat}
+                </button>
+            `).join('');
+            document.getElementById('mobile-category-select').value = activeTab;
+        }
+
+        function switchTab(cat) {
+            activeTab = cat;
+            renderTabs();
+            renderCourses();
+        }
+
+        function renderCourses() {
+            const grid = document.getElementById('course-grid');
+            const filtered = COURSES.filter(c => c.category === activeTab);
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+                    New cohorts for ${activeTab} launching soon. Stay tuned!
+                </div>`;
+                return;
+            }
+
+            grid.innerHTML = filtered.map(course => `
+                <div class="relative bg-white rounded-3xl border ${course.isPremium ? 'border-orange-300 shadow-orange-100/50' : 'border-slate-200'} shadow-sm hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col group">
+                    ${course.isPremium ? `<div class="absolute inset-0 border-4 border-orange-400 rounded-3xl animate-pulse pointer-events-none"></div>` : ''}
+                    
+                    <div class="p-6 pb-0 flex flex-wrap gap-2 mb-4">
+                        ${course.tags.map(tag => `
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-md ${tag === 'Limited Seats' ? 'bg-red-100 text-red-700' : tag === 'Premium' ? 'bg-orange-100 text-orange-700' : 'bg-slate-100 text-slate-600'}">
+                                ${tag}
+                            </span>
+                        `).join('')}
+                    </div>
+
+                    <div class="px-6 flex-grow">
+                        <h3 class="text-2xl font-bold text-slate-900 mb-2 leading-tight group-hover:text-blue-600 transition-colors">${course.title}</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex items-center"><i data-lucide="user" class="w-4 h-4 mr-1.5"></i> Target: ${course.target}</p>
+                        
+                        <ul class="space-y-2 mb-8">
+                            <li class="flex items-center text-sm text-slate-600"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i> Live Interactive Sessions</li>
+                            <li class="flex items-center text-sm text-slate-600"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i> Max 15 Students/Batch</li>
+                            <li class="flex items-center text-sm text-slate-600"><i data-lucide="check-circle" class="w-4 h-4 text-green-500 mr-2"></i> Lifetime Material Access</li>
+                            ${course.bonus ? `
+                            <li class="flex items-center text-sm font-bold text-orange-600 bg-orange-50 p-1.5 rounded-lg mt-2 border border-orange-100">
+                                <i data-lucide="shield" class="w-4 h-4 mr-2"></i> ${course.bonus}
+                            </li>` : ''}
+                        </ul>
+                    </div>
+
+                    <div class="p-6 bg-slate-50 border-t border-slate-100 mt-auto">
+                        <div class="flex justify-between items-end mb-4">
+                            <div>
+                                <p class="text-xs text-slate-400 line-through mb-1">₹${course.originalPrice.toLocaleString()}</p>
+                                <p class="text-3xl font-black text-slate-900">₹${course.price.toLocaleString()}</p>
+                            </div>
+                            ${course.isBundle ? `
+                            <div class="bg-green-100 text-green-700 text-xs font-bold px-2 py-1 rounded-md">
+                                Save ₹${(course.originalPrice - course.price).toLocaleString()}
+                            </div>` : ''}
+                        </div>
+                        
+                        <button id="btn-add-${course.id}" onclick="addToCart(${course.id})"
+                            class="relative w-full bg-slate-900 hover:bg-blue-600 text-white font-bold py-3.5 rounded-xl transition-colors flex justify-center items-center overflow-hidden">
+                            <span>Add to Cart</span> <i data-lucide="shopping-cart" class="w-4 h-4 ml-2"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            lucide.createIcons();
+        }
+
+        function renderBlogs() {
+            const query = document.getElementById('blog-search').value.toLowerCase();
+            const container = document.getElementById('blog-container');
+            const filtered = BLOGS.filter(b => b.title.toLowerCase().includes(query) || b.category.toLowerCase().includes(query));
+
+            const grouped = {};
+            filtered.forEach(blog => {
+                // Map 'English' to 'Communication' if desired, or keep as is.
+                const cat = blog.category === 'English' ? 'Communication' : blog.category === 'GST' ? 'Income Tax & GST' : blog.category;
+                if (!grouped[cat]) grouped[cat] = [];
+                grouped[cat].push(blog);
+            });
+
+            const customOrder = ["IT Skills", "Communication", "Income Tax & GST", "Quantitative Aptitude", "Reasoning"];
+            const categories = Object.keys(grouped).sort((a, b) => {
+                let indexA = customOrder.indexOf(a);
+                let indexB = customOrder.indexOf(b);
+                if (indexA === -1) indexA = 999;
+                if (indexB === -1) indexB = 999;
+                return indexA - indexB;
+            });
+
+            container.innerHTML = categories.map(category => `
+                <div class="blog-category-group">
+                    <h3 class="text-2xl font-black text-slate-800 mb-6 border-b-2 border-blue-100 pb-2 inline-block">${category}</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        ${grouped[category].slice(0, 4).map(blog => `
+                            <div onclick="openBlog(${blog.id})" class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer group flex flex-col h-full">
+                                <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md inline-block mb-3 w-fit">${blog.category}</span>
+                                <h3 class="font-bold text-lg text-slate-900 mb-2 group-hover:text-blue-600 line-clamp-2">${blog.title}</h3>
+                                <p class="text-sm text-slate-500 mb-4 line-clamp-3 flex-grow">${blog.content}</p>
+                                <div class="flex items-center justify-between text-xs text-slate-400 mt-auto pt-4 border-t border-slate-100">
+                                    <span>${blog.date}</span>
+                                    <span class="flex items-center"><i data-lucide="book-open" class="w-3 h-3 mr-1"></i> ${blog.readTime}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('blog-more-btn').classList.toggle('hidden', filtered.length <= 8);
+            lucide.createIcons();
+        }
+
+        function renderFAQs() {
+            document.getElementById('faq-container').innerHTML = FAQS.map(faq => `
+                <details class="group bg-slate-50 rounded-2xl border border-slate-200 [&_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex cursor-pointer items-center justify-between gap-1.5 p-6 text-slate-900 font-semibold">
+                        <h2 class="font-medium text-lg">${faq.q}</h2>
+                        <span class="shrink-0 rounded-full bg-white p-1.5 text-slate-900 sm:p-3 shadow-sm group-open:-rotate-45 transition-transform duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    </summary>
+                    <div class="px-6 pb-6 text-slate-600 leading-relaxed">
+                        <p>${faq.a}</p>
+                    </div>
+                </details>
+            `).join('');
+        }
+
+        // --- CART LOGIC ---
+        function addToCart(courseId) {
+            const course = COURSES.find(c => c.id === courseId);
+            if (!cart.find(item => item.id === courseId)) {
+                cart.push(course);
+                localStorage.setItem('clickcareer_cart', JSON.stringify(cart));
+                updateCartUI();
+
+                // Button Animation
+                const btn = document.getElementById(`btn-add-${courseId}`);
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = `<span class="flex items-center text-green-400"><i data-lucide="check-circle" class="w-4 h-4 mr-2"></i> Added!</span><span class="absolute text-2xl font-black text-white/50 -translate-y-10 animate-custom-ping">+1</span>`;
+                lucide.createIcons();
+                setTimeout(() => {
+                    if (document.getElementById(`btn-add-${courseId}`)) {
+                        btn.innerHTML = originalHtml;
+                        lucide.createIcons();
+                    }
+                }, 1500);
+            }
+        }
+
+        function removeFromCart(courseId) {
+            cart = cart.filter(c => c.id !== courseId);
+            localStorage.setItem('clickcareer_cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countLabels = [document.getElementById('cart-count-desktop'), document.getElementById('cart-count-mobile')];
+            const stickyCount = document.getElementById('sticky-cart-count');
+
+            if (cart.length > 0) {
+                countLabels.forEach(el => { el.textContent = cart.length; el.classList.remove('hidden'); el.classList.add('flex'); });
+                stickyCount.textContent = `(${cart.length})`;
+            } else {
+                countLabels.forEach(el => { el.classList.add('hidden'); el.classList.remove('flex'); });
+                stickyCount.textContent = '';
+            }
+
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartFooter = document.getElementById('cart-footer');
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center text-slate-500 mt-20 flex flex-col items-center">
+                        <i data-lucide="shopping-cart" class="text-slate-200 mb-4 w-12 h-12"></i>
+                        <p class="text-lg">Your cart is empty.</p>
+                        <button onclick="closeModal('cart-modal')" class="mt-6 text-blue-600 font-bold border border-blue-600 px-6 py-2 rounded-full">Browse Courses</button>
+                    </div>`;
+                cartFooter.classList.add('hidden');
+            } else {
+                cartItemsContainer.innerHTML = cart.map(item => `
+                    <div class="flex justify-between items-center bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <div class="pr-4">
+                            <h4 class="font-bold text-slate-900 leading-tight">${item.title}</h4>
+                            <p class="text-xs text-slate-500 mt-1">${item.category}</p>
+                            <p class="text-sm font-semibold text-blue-600 mt-2">₹${item.price.toLocaleString()}</p>
+                        </div>
+                        <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-red-500 p-2"><i data-lucide="x-circle" class="w-5 h-5"></i></button>
+                    </div>
+                `).join('');
+
+                const total = cart.reduce((sum, item) => sum + item.price, 0);
+                document.getElementById('cart-total-items').textContent = cart.length;
+                document.getElementById('cart-total-price').textContent = total.toLocaleString();
+                cartFooter.classList.remove('hidden');
+            }
+            lucide.createIcons();
+        }
+
+        function simulateCheckout() {
+            alert("Initiating Razorpay/Instamojo Secure Gateway...");
+            setTimeout(() => {
+                alert("Payment Successful! Welcome to ClickCareer.");
+                cart = [];
+                localStorage.setItem('clickcareer_cart', JSON.stringify(cart));
+                updateCartUI();
+                closeModal('cart-modal');
+            }, 1500);
+        }
+
+        // --- MODAL & MENU CONTROLS ---
+        function openModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+
+            if (id === 'cart-modal') {
+                document.getElementById('cart-panel').classList.remove('translate-x-full');
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById(id);
+            modal.classList.add('opacity-0', 'pointer-events-none');
+
+            if (id === 'cart-modal') {
+                document.getElementById('cart-panel').classList.add('translate-x-full');
+            }
+
+            // Clear hash when blog modal is closed
+            if (id === 'blog-modal') {
+                currentOpenBlogId = null;
+                // Restore default page title and OG tags
+                document.title = 'ClickCareer | Master IT, GST, English & Aptitude Live';
+                document.querySelector('meta[property="og:title"]').setAttribute('content', 'ClickCareer | Master IT, GST, English & Aptitude Live');
+                document.querySelector('meta[property="og:description"]').setAttribute('content', "India's most premium, outcome-driven learning platform. Join the elite 1% who learn directly from industry professionals.");
+                if (window.location.hash.startsWith('#blog-')) {
+                    history.pushState(null, '', window.location.pathname);
+                }
+            }
+        }
+
+        function toggleMobileMenu() {
+            isMobileMenuOpen = !isMobileMenuOpen;
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('mobile-menu-icon');
+            if (isMobileMenuOpen) {
+                menu.classList.remove('hidden');
+                icon.setAttribute('data-lucide', 'x');
+            } else {
+                menu.classList.add('hidden');
+                icon.setAttribute('data-lucide', 'menu');
+            }
+            lucide.createIcons();
+        }
+
+        function toggleAuthMode() {
+            authMode = authMode === 'login' ? 'signup' : 'login';
+            document.getElementById('auth-title').textContent = authMode === 'login' ? 'Welcome Back' : 'Create Account';
+            document.getElementById('auth-desc').textContent = authMode === 'login' ? 'Enter your details to access your courses.' : 'Join the fastest growing learning platform.';
+            document.getElementById('auth-submit').textContent = authMode === 'login' ? 'Sign In' : 'Sign Up';
+            document.getElementById('auth-switch-text').textContent = authMode === 'login' ? "Don't have an account? " : "Already have an account? ";
+            document.getElementById('auth-switch-btn').textContent = authMode === 'login' ? 'Sign up here' : 'Log in here';
+
+            if (authMode === 'signup') {
+                document.getElementById('auth-name').classList.remove('hidden');
+            } else {
+                document.getElementById('auth-name').classList.add('hidden');
+            }
+        }
+
+        function handleDemoSubmit(e) {
+            e.preventDefault();
+            alert('Demo booked successfully! We will contact you soon.');
+            closeModal('demo-modal');
+            e.target.reset();
+        }
+
+        function handlePartnerSubmit(e) {
+            e.preventDefault();
+            alert('Partnership request submitted successfully! Our team will reach out to you shortly.');
+            closeModal('partner-modal');
+            e.target.reset();
+        }
+
+        // --- CURRENT OPEN BLOG (for sharing) ---
+        let currentOpenBlogId = null;
+
+        function openBlog(id, skipHashUpdate) {
+            const blog = BLOGS.find(b => b.id === id);
+            if (!blog) return;
+            currentOpenBlogId = id;
+
+            document.getElementById('blog-modal-cat').textContent = blog.category;
+            document.getElementById('blog-modal-cat-text').textContent = blog.category.toLowerCase();
+            document.getElementById('blog-modal-title').textContent = blog.title;
+            document.getElementById('blog-modal-avatar').textContent = blog.author[0];
+            document.getElementById('blog-modal-author').textContent = blog.author;
+            document.getElementById('blog-modal-date').textContent = blog.date;
+            document.getElementById('blog-modal-time').textContent = blog.readTime;
+
+            document.getElementById('blog-modal-content').innerHTML = blog.content.split('\n\n').map(p => `<p>${p}</p>`).join('');
+
+            // Update URL hash for deep-linking / sharing
+            if (!skipHashUpdate) {
+                history.pushState(null, '', '#blog-' + id);
+            }
+
+            // Update OG meta dynamically (for JS-aware crawlers)
+            document.querySelector('meta[property="og:title"]').setAttribute('content', blog.title + ' | ClickCareer Blog');
+            document.querySelector('meta[property="og:description"]').setAttribute('content', blog.content.substring(0, 160) + '...');
+            document.title = blog.title + ' | ClickCareer Blog';
+
+            openModal('blog-modal');
+        }
+
+        // --- SHARE BLOG ---
+        function shareBlog() {
+            if (!currentOpenBlogId) return;
+            const blog = BLOGS.find(b => b.id === currentOpenBlogId);
+            const shareUrl = window.location.origin + window.location.pathname + '#blog-' + currentOpenBlogId;
+
+            // Use Web Share API if available (mobile), otherwise copy to clipboard
+            if (navigator.share) {
+                navigator.share({
+                    title: blog.title + ' | ClickCareer',
+                    text: blog.content.substring(0, 100) + '...',
+                    url: shareUrl
+                }).catch(() => { });
+            } else {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    // Show copied feedback
+                    const btn = document.getElementById('blog-share-btn');
+                    const originalTitle = btn.title;
+                    btn.title = 'Link copied!';
+                    btn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                    btn.classList.add('bg-green-500', 'hover:bg-green-600');
+                    setTimeout(() => {
+                        btn.title = originalTitle;
+                        btn.classList.remove('bg-green-500', 'hover:bg-green-600');
+                        btn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                    }, 2000);
+                }).catch(() => {
+                    // Fallback: show prompt
+                    prompt('Copy this link to share:', shareUrl);
+                });
+            }
+        }
+
+        // --- TYPING EFFECT ---
+        function startTypingEffect() {
+            const words = ["Master IT Skills live", "Master English live", "Master Aptitude live"];
+            let wordIndex = 0;
+            let charIndex = words[0].length;
+            let isDeleting = true;
+            const element = document.getElementById('typing-text');
+
+            function type() {
+                const currentWord = words[wordIndex];
+
+                if (isDeleting) {
+                    element.textContent = currentWord.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    element.textContent = currentWord.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                let typeSpeed = isDeleting ? 50 : 100;
+
+                if (!isDeleting && charIndex === currentWord.length) {
+                    typeSpeed = 1500; // Pause at end of word
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                    typeSpeed = 500; // Pause before new word
+                }
+
+                setTimeout(type, typeSpeed);
+            }
+            setTimeout(type, 1500);
+        }
     </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+</body>
+
 </html>
