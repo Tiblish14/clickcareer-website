@@ -23,8 +23,8 @@ export function AppProvider({ children }) {
       try {
         const [cats, crs, blgs] = await Promise.all([
           client.fetch(`*[_type == "category"]{_id, title, description}`),
-          client.fetch(`*[_type == "course"]{_id, title, price, "category": category->title, isPremium, targetAudience, features}`),
-          client.fetch(`*[_type == "blog"]{_id, title, "category": category->title, author, date, readTime, content}`)
+          client.fetch(`*[_type == "course"]{_id, title, slug, price, "category": category->title, isPremium, targetAudience, features}`),
+          client.fetch(`*[_type == "blog"]{_id, title, slug, "category": category->title, author, date, readTime, content, seoTitle, seoDescription}`)
         ]);
         setCategories(cats.map(c => c.title));
         setCourses(crs.map(c => ({...c, id: c._id})));

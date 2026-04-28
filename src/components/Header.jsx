@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { ChevronDown, User, ShoppingCart, Menu, X } from 'lucide-react';
+import { ChevronDown, User, ShoppingCart, Menu, X, LayoutDashboard } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import { cn } from '../lib/utils';
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -12,6 +13,10 @@ export default function Header() {
 
   const scrollToSection = (id) => {
     setIsMobileMenuOpen(false);
+    if(window.location.pathname !== '/') {
+        window.location.href = `/#${id}`;
+        return;
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -20,30 +25,30 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => window.scrollTo(0, 0)}>
+          <Link to="/" className="flex-shrink-0 flex items-center cursor-pointer">
             <span className="text-2xl font-black bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600">
               ClickCareer.
             </span>
-          </div>
+          </Link>
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex space-x-8 items-center font-medium text-sm text-slate-700">
             <div className="relative group cursor-pointer h-16 flex items-center">
-              <span className="hover:text-blue-600 flex items-center transition-colors">Courses <ChevronDown className="ml-1 w-4 h-4" /></span>
+              <Link to="/courses" className="hover:text-blue-600 flex items-center transition-colors">Courses <ChevronDown className="ml-1 w-4 h-4" /></Link>
               <div className="absolute top-16 left-0 w-48 bg-white border border-slate-200 shadow-xl rounded-b-xl py-2 hidden group-hover:block transition-all">
                 {categories.map(cat => (
-                  <div 
+                  <Link 
                     key={cat}
-                    onClick={() => document.getElementById('courses').scrollIntoView({behavior: 'smooth'})} 
-                    className="px-4 py-2 hover:bg-blue-50 hover:text-blue-600 cursor-pointer"
+                    to={`/courses`}
+                    className="block px-4 py-2 hover:bg-blue-50 hover:text-blue-600 cursor-pointer"
                   >
                     {cat}
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>
             <button onClick={() => scrollToSection('about')} className="hover:text-blue-600 transition-colors">Who Are We</button>
-            <button onClick={() => scrollToSection('blogs')} className="hover:text-blue-600 transition-colors">Blogs</button>
+            <Link to="/blogs" className="hover:text-blue-600 transition-colors">Blogs</Link>
             <button onClick={() => openModal('partner')} className="hover:text-blue-600 text-orange-500 font-semibold transition-colors">Partner for Training</button>
           </nav>
 
@@ -57,6 +62,9 @@ export default function Header() {
               </SignInButton>
             </SignedOut>
             <SignedIn>
+              <Link to="/dashboard" className="text-slate-700 hover:text-blue-600 font-medium text-sm transition-colors flex items-center">
+                <LayoutDashboard className="w-4 h-4 mr-1.5" /> Dashboard
+              </Link>
               <UserButton appearance={{ elements: { userButtonAvatarBox: "w-8 h-8" } }} />
             </SignedIn>
             <button onClick={() => openModal('cart')} className="relative text-slate-700 hover:text-blue-600 transition-colors group">

@@ -1,19 +1,13 @@
-export const CATEGORIES = ["IT Skills", "Quantitative Aptitude", "English", "Reasoning", "GST"];
+export const CATEGORIES = ["Industry English", "Reasoning", "Excel", "Interview Prep"];
 
 export const COURSES = [
-    { id: 1, title: "MS Office Mastery (Word, Excel, PPT)", category: "IT Skills", target: "Students & Professionals", price: 2999, originalPrice: 6000, tags: ["Essential", "Best Seller"] },
-    { id: 2, title: "AI Prompt Engineering", category: "IT Skills", target: "Future-Proof Careers", price: 3499, originalPrice: 7000, tags: ["Trending", "Limited Seats"] },
-    { id: 8, title: "Digital Marketing & Social Media", category: "IT Skills", target: "Entrepreneurs & Creators", price: 4999, originalPrice: 10000, tags: ["Live Mentor"] },
-    { id: 9, title: "Safe Digital Practices & Cyber Security", category: "IT Skills", target: "Everyone", price: 1999, originalPrice: 4000, tags: [] },
-    { id: 10, title: "Quant for Campus Placements", category: "Quantitative Aptitude", target: "B.Tech Students", price: 3999, originalPrice: 8000, tags: ["TCS, Wipro, Infosys"] },
-    { id: 11, title: "SSC CGL Quant Mastery", category: "Quantitative Aptitude", target: "SSC Aspirants", price: 4999, originalPrice: 10000, tags: ["Taught by AIR 9", "Best Seller"] },
-    { id: 12, title: "Logical Reasoning for Tech MNCs", category: "Reasoning", target: "B.Tech Students", price: 2999, originalPrice: 6000, tags: ["Campus Drives"] },
-    { id: 13, title: "Target SSC Reasoning Pro", category: "Reasoning", target: "SSC Aspirants", price: 3499, originalPrice: 7000, tags: ["Taught by AIR 9"] },
-    { id: 4, title: "Spoken English Pro", category: "English", target: "Professionals & Students", price: 2999, originalPrice: 5000, tags: ["Interactive"] },
-    { id: 14, title: "Grammar & Vocab for Exams", category: "English", target: "SSC / Bank PO", price: 2499, originalPrice: 5000, tags: ["Taught by AIR 9"] },
-    { id: 15, title: "Advanced Vocab for Professionals", category: "English", target: "Corporate Professionals", price: 3499, originalPrice: 7000, tags: ["Business Focus"] },
-    { id: 6, title: "Mastering GST 2026", category: "GST", target: "CA/CS & Accountants", price: 6999, originalPrice: 15000, isPremium: true, bonus: "Free Excel for Audit Module", tags: ["Premium"] },
-    { id: 7, title: "B.Tech Campus Placement Combo", category: "Quantitative Aptitude", target: "B.Tech Students", price: 5999, originalPrice: 14000, isBundle: true, tags: ["Bundle Offer"] },
+    { id: 1, title: "Excel for GST & Accounting", category: "Excel", target: "B.Tech Students & Freshers", price: 2999, originalPrice: 6000, tags: ["Essential", "Best Seller"] },
+    { id: 2, title: "Excel for Data Analytics", category: "Excel", target: "B.Tech Students", price: 3499, originalPrice: 7000, tags: ["Trending"] },
+    { id: 3, title: "Industry-specific English for Engineers", category: "Industry English", target: "B.Tech Students", price: 2499, originalPrice: 5000, tags: ["Live Mentor"] },
+    { id: 4, title: "How to speak in technical interviews", category: "Industry English", target: "Freshers", price: 1999, originalPrice: 4000, tags: [] },
+    { id: 5, title: "Reasoning for Tech Placements", category: "Reasoning", target: "B.Tech Students", price: 3999, originalPrice: 8000, tags: ["TCS, Wipro, Infosys"] },
+    { id: 6, title: "Advanced Logical Reasoning", category: "Reasoning", target: "B.Tech Students", price: 2999, originalPrice: 6000, tags: ["Campus Drives"] },
+    { id: 7, title: "Complete B.Tech Interview Prep Combo", category: "Interview Prep", target: "B.Tech Students", price: 5999, originalPrice: 14000, isBundle: true, tags: ["Bundle Offer"] },
 ];
 
 export const BLOGS = Array.from({ length: 40 }).map((_, i) => ({

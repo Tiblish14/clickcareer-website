@@ -1,37 +1,8 @@
-import { useEffect, useState } from 'react';
-import { CheckCircle, Shield, Play, Star } from 'lucide-react';
+import { CheckCircle, Shield, Star } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 
 export default function Hero() {
   const { openModal } = useAppContext();
-  const words = ["Master IT Skills live", "Master English live", "Master Aptitude live"];
-  const [text, setText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [wordIndex, setWordIndex] = useState(0);
-
-  useEffect(() => {
-    const currentWord = words[wordIndex];
-    let timeout;
-
-    if (isDeleting) {
-      timeout = setTimeout(() => {
-        setText(currentWord.substring(0, text.length - 1));
-        if (text.length === 1) {
-          setIsDeleting(false);
-          setWordIndex((prev) => (prev + 1) % words.length);
-        }
-      }, 50);
-    } else {
-      timeout = setTimeout(() => {
-        setText(currentWord.substring(0, text.length + 1));
-        if (text.length === currentWord.length) {
-          setTimeout(() => setIsDeleting(true), 1500);
-        }
-      }, 100);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [text, isDeleting, wordIndex, words]);
 
   return (
     <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center">
@@ -41,25 +12,25 @@ export default function Hero() {
           Next Live Batch in 3 Days
         </div>
         <h1 className="text-5xl lg:text-6xl font-black leading-tight text-slate-900 tracking-tight">
-          Accelerate your Career. <br />
+          Crack B.Tech Interviews with <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-            {text}
+            Job-Ready Skills
           </span>
           <span className="animate-ping text-blue-600 font-normal">|</span>
         </h1>
         <p className="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0">
-          India's most premium, outcome-driven learning platform. Join the elite 1% who learn directly from industry professionals.
+          ClickCareer helps B.Tech students and freshers crack interviews with industry-specific English, reasoning, and Excel for GST & accounting.
         </p>
 
         {/* Value Props */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
           <div className="flex items-center bg-white border border-slate-200 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow">
             <CheckCircle className="text-green-500 mr-3 w-6 h-6" />
-            <div className="text-left text-sm font-semibold">True Mentorship<br /><span className="text-xs text-slate-500 font-normal">Live doubt clearing</span></div>
+            <div className="text-left text-sm font-semibold">B.Tech Students<br /><span className="text-xs text-slate-500 font-normal">Placement prep</span></div>
           </div>
           <div className="flex items-center bg-white border border-slate-200 px-4 py-3 rounded-xl shadow-sm hover:shadow-md transition-shadow">
             <Shield className="text-blue-500 mr-3 w-6 h-6" />
-            <div className="text-left text-sm font-semibold">Max 15 Students<br /><span className="text-xs text-slate-500 font-normal">Personal attention</span></div>
+            <div className="text-left text-sm font-semibold">Job-Ready Skills<br /><span className="text-xs text-slate-500 font-normal">Practical learning</span></div>
           </div>
         </div>
 
@@ -67,8 +38,8 @@ export default function Hero() {
           <button onClick={() => document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' })} className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:from-blue-700 hover:to-indigo-700 transition-all shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 transform hover:-translate-y-0.5">
             Explore Courses
           </button>
-          <button onClick={() => openModal('demo')} className="bg-white text-slate-800 border-2 border-slate-200 px-8 py-4 rounded-full font-bold text-lg hover:border-slate-300 hover:bg-slate-50 transition-all flex items-center justify-center transform hover:-translate-y-0.5">
-            <Play className="mr-2 h-5 w-5 text-orange-500 fill-orange-500" /> Book Free 15-Min Demo
+          <button onClick={() => document.getElementById('courses')?.scrollIntoView({ behavior: 'smooth' })} className="bg-white text-slate-800 border-2 border-slate-200 px-8 py-4 rounded-full font-bold text-lg hover:border-slate-300 hover:bg-slate-50 transition-all flex items-center justify-center transform hover:-translate-y-0.5">
+            Start Learning
           </button>
         </div>
       </div>
