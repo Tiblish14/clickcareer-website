@@ -2,7 +2,7 @@ import { CheckCircle, Shield, Star } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 
 export default function Hero() {
-  const { openModal } = useAppContext();
+  const { siteSettings } = useAppContext();
 
   return (
     <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center">
@@ -12,14 +12,14 @@ export default function Hero() {
           Next Live Batch in 3 Days
         </div>
         <h1 className="text-5xl lg:text-6xl font-black leading-tight text-slate-900 tracking-tight">
-          Crack B.Tech Interviews with <br />
+          Accelerate your Career. <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-            Job-Ready Skills
+            Master Skills
           </span>
           <span className="animate-ping text-blue-600 font-normal">|</span>
         </h1>
         <p className="text-lg text-slate-600 max-w-xl mx-auto lg:mx-0">
-          ClickCareer helps B.Tech students and freshers crack interviews with industry-specific English, reasoning, and Excel for GST & accounting.
+          {siteSettings?.heroText || "India's most premium, outcome-driven learning platform. Join the elite 1% who learn directly from industry professionals."}
         </p>
 
         {/* Value Props */}

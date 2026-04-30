@@ -10,6 +10,7 @@ export default function CourseCatalog() {
 
   useEffect(() => {
     if (categories.length > 0 && !activeTab) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveTab(categories[0]);
     }
   }, [categories, activeTab]);

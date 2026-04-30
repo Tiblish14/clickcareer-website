@@ -1,5 +1,5 @@
 {
-  "name": "clickcareer-website",
+  "name": "clickcareer",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@clerk/clerk-react": "^5.61.6",
     "@sanity/client": "^7.22.0",
     "@sanity/image-url": "^2.1.1",
     "@supabase/supabase-js": "^2.105.0",

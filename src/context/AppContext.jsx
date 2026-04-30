@@ -1,10 +1,18 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { client } from '../lib/sanityClient';
+import { BLOGS, CATEGORIES, COURSES } from '../data/mockData';
 
 const AppContext = createContext();
 
 export function AppProvider({ children }) {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => {
+    try {
+      const saved = localStorage.getItem('clickcareer_cart');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
+  });
   const [modals, setModals] = useState({
     cart: false,
     auth: false,
@@ -16,21 +24,27 @@ export function AppProvider({ children }) {
   const [categories, setCategories] = useState([]);
   const [courses, setCourses] = useState([]);
   const [blogs, setBlogs] = useState([]);
+  const [siteSettings, setSiteSettings] = useState(null);
   const [dataLoading, setDataLoading] = useState(true);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const [cats, crs, blgs] = await Promise.all([
+        const [cats, crs, blgs, settings] = await Promise.all([
           client.fetch(`*[_type == "category"]{_id, title, description}`),
           client.fetch(`*[_type == "course"]{_id, title, slug, price, "category": category->title, isPremium, targetAudience, features}`),
-          client.fetch(`*[_type == "blog"]{_id, title, slug, "category": category->title, author, date, readTime, content, seoTitle, seoDescription}`)
+          client.fetch(`*[_type == "blog"]{_id, title, slug, "category": category->title, author, date, readTime, content, seoTitle, seoDescription}`),
+          client.fetch(`*[_type == "siteSettings"][0]`)
         ]);
-        setCategories(cats.map(c => c.title));
-        setCourses(crs.map(c => ({...c, id: c._id})));
-        setBlogs(blgs.map(b => ({...b, id: b._id})));
+        setCategories(cats.length ? cats.map(c => c.title) : CATEGORIES);
+        setCourses(crs.length ? crs.map(c => ({...c, id: c._id})) : COURSES);
+        setBlogs(blgs.length ? blgs.map(b => ({...b, id: b._id})) : BLOGS);
+        setSiteSettings(settings);
       } catch (err) {
         console.error("Error fetching Sanity data:", err);
+        setCategories(CATEGORIES);
+        setCourses(COURSES);
+        setBlogs(BLOGS);
       } finally {
         setDataLoading(false);
       }
@@ -38,12 +52,7 @@ export function AppProvider({ children }) {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('clickcareer_cart');
-      if (saved) setCart(JSON.parse(saved));
-    } catch (e) {}
-  }, []);
+    // Cart initialization moved to state declaration
 
   useEffect(() => {
     localStorage.setItem('clickcareer_cart', JSON.stringify(cart));
@@ -75,11 +84,14 @@ export function AppProvider({ children }) {
       cart, addToCart, removeFromCart, clearCart,
       modals, openModal, closeModal,
       activeBlogId, openBlog,
-      categories, courses, blogs, dataLoading
+      categories, courses, blogs, siteSettings, dataLoading
     }}>
       {children}
     </AppContext.Provider>
   );
 }
 
-export const useAppContext = () => useContext(AppContext);
+// eslint-disable-next-line react-refresh/only-export-components
+export function useAppContext() {
+  return useContext(AppContext);
+}

@@ -1,50 +1,85 @@
--- Run this in the Supabase SQL Editor
+-- ClickCareer Supabase schema
+-- Run this once in Supabase SQL Editor.
 
--- 1. Create Users Table
-create table public.users (
-  id text primary key, -- Clerk User ID
-  email text,
+create extension if not exists "pgcrypto";
+
+create table if not exists public.profiles (
+  id uuid primary key references auth.users(id) on delete cascade,
+  email text not null,
   full_name text,
-  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+  created_at timestamp with time zone default timezone('utc', now()) not null,
+  updated_at timestamp with time zone default timezone('utc', now()) not null
 );
 
--- 2. Create Leads Table
-create table public.leads (
-  id text primary key, -- Generated Lead ID
-  user_id text references public.users(id),
+create table if not exists public.leads (
+  id text primary key,
+  user_id uuid references auth.users(id) on delete set null,
+  user_email text,
   course_id text,
-  course_title text,
-  status text default 'pending',
-  created_at timestamp with time zone default timezone('utc'::text, now()) not null
+  course_title text not null,
+  status text default 'pending' not null,
+  created_at timestamp with time zone default timezone('utc', now()) not null
 );
 
--- 3. Set up Row Level Security (RLS)
-alter table public.users enable row level security;
-alter table public.leads enable row level security;
+create table if not exists public.demo_requests (
+  id uuid primary key default gen_random_uuid(),
+  full_name text not null,
+  phone text not null,
+  email text not null,
+  subject text not null,
+  status text default 'new' not null,
+  created_at timestamp with time zone default timezone('utc', now()) not null
+);
 
--- Create policies so users can only read/insert their own data
-create policy "Users can insert their own profile."
-  on public.users for insert
+create table if not exists public.partner_requests (
+  id uuid primary key default gen_random_uuid(),
+  organization_name text not null,
+  contact_person text not null,
+  phone text not null,
+  email text not null,
+  partnership_type text not null,
+  status text default 'new' not null,
+  created_at timestamp with time zone default timezone('utc', now()) not null
+);
+
+alter table public.profiles enable row level security;
+alter table public.leads enable row level security;
+alter table public.demo_requests enable row level security;
+alter table public.partner_requests enable row level security;
+
+drop policy if exists "Profiles are readable by owner" on public.profiles;
+drop policy if exists "Profiles are insertable by owner" on public.profiles;
+drop policy if exists "Profiles are updatable by owner" on public.profiles;
+drop policy if exists "Leads are readable by owner" on public.leads;
+drop policy if exists "Leads are insertable by owner" on public.leads;
+drop policy if exists "Anyone can submit demo requests" on public.demo_requests;
+drop policy if exists "Anyone can submit partner requests" on public.partner_requests;
+
+create policy "Profiles are readable by owner"
+  on public.profiles for select
+  using (auth.uid() = id);
+
+create policy "Profiles are insertable by owner"
+  on public.profiles for insert
   with check (auth.uid() = id);
 
-create policy "Users can update their own profile."
-  on public.users for update
-  using (auth.uid() = id);
+create policy "Profiles are updatable by owner"
+  on public.profiles for update
+  using (auth.uid() = id)
+  with check (auth.uid() = id);
 
-create policy "Users can read their own profile."
-  on public.users for select
-  using (auth.uid() = id);
-
-create policy "Users can insert their own leads."
-  on public.leads for insert
-  with check (auth.uid() = user_id);
-
-create policy "Users can read their own leads."
+create policy "Leads are readable by owner"
   on public.leads for select
   using (auth.uid() = user_id);
 
--- Note: Because we are using Clerk, Supabase's auth.uid() will not map directly 
--- to Clerk unless we set up JWT templates. 
--- For MVP purposes, since we are inserting from the frontend using the anon key,
--- we can temporarily allow anonymous inserts, OR you can disable RLS completely 
--- during MVP testing by skipping the alter table commands above.
+create policy "Leads are insertable by owner"
+  on public.leads for insert
+  with check (auth.uid() = user_id);
+
+create policy "Anyone can submit demo requests"
+  on public.demo_requests for insert
+  with check (true);
+
+create policy "Anyone can submit partner requests"
+  on public.partner_requests for insert
+  with check (true);

@@ -9,6 +9,7 @@ export default function BlogDetailPage() {
   
   // Try matching Sanity slug first, then fallback to ID
   const blog = blogs.find(b => (b.slug && b.slug.current === slug) || b.id.toString() === slug);
+  const blogUrl = `https://www.clickcareer.in/blogs/${slug}`;
 
   if (!blog) {
     return (
@@ -24,8 +25,12 @@ export default function BlogDetailPage() {
       <Helmet>
         <title>{blog.seoTitle || blog.title} | ClickCareer</title>
         <meta name="description" content={blog.seoDescription || `Read ${blog.title} by ${blog.author} on ClickCareer.`} />
+        <link rel="canonical" href={blogUrl} />
         <meta property="og:title" content={`${blog.seoTitle || blog.title} | ClickCareer`} />
         <meta property="og:description" content={blog.seoDescription || `Read ${blog.title} by ${blog.author} on ClickCareer.`} />
+        <meta property="og:url" content={blogUrl} />
+        <meta property="og:image" content="https://www.clickcareer.in/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <Link to="/blogs" className="inline-flex items-center text-slate-500 hover:text-blue-600 mb-8 transition-colors">
         <ArrowLeft className="w-4 h-4 mr-2" /> Back to all articles

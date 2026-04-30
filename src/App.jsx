@@ -11,12 +11,10 @@ import BlogDetailPage from './pages/BlogDetailPage';
 import CourseListingPage from './pages/CourseListingPage';
 import CourseDetailPage from './pages/CourseDetailPage';
 import DashboardPage from './pages/DashboardPage';
-import SyncUser from './components/SyncUser';
 
 function App() {
   return (
     <AppProvider>
-      <SyncUser />
       <div className="bg-slate-50 font-sans text-slate-900 pb-16 md:pb-0 overflow-x-hidden min-h-screen">
         <Header />
         

@@ -1,13 +1,13 @@
 export const CATEGORIES = ["Industry English", "Reasoning", "Excel", "Interview Prep"];
 
 export const COURSES = [
-    { id: 1, title: "Excel for GST & Accounting", category: "Excel", target: "B.Tech Students & Freshers", price: 2999, originalPrice: 6000, tags: ["Essential", "Best Seller"] },
-    { id: 2, title: "Excel for Data Analytics", category: "Excel", target: "B.Tech Students", price: 3499, originalPrice: 7000, tags: ["Trending"] },
-    { id: 3, title: "Industry-specific English for Engineers", category: "Industry English", target: "B.Tech Students", price: 2499, originalPrice: 5000, tags: ["Live Mentor"] },
-    { id: 4, title: "How to speak in technical interviews", category: "Industry English", target: "Freshers", price: 1999, originalPrice: 4000, tags: [] },
-    { id: 5, title: "Reasoning for Tech Placements", category: "Reasoning", target: "B.Tech Students", price: 3999, originalPrice: 8000, tags: ["TCS, Wipro, Infosys"] },
-    { id: 6, title: "Advanced Logical Reasoning", category: "Reasoning", target: "B.Tech Students", price: 2999, originalPrice: 6000, tags: ["Campus Drives"] },
-    { id: 7, title: "Complete B.Tech Interview Prep Combo", category: "Interview Prep", target: "B.Tech Students", price: 5999, originalPrice: 14000, isBundle: true, tags: ["Bundle Offer"] },
+    { id: 1, title: "Excel for GST & Accounting", category: "Excel", targetAudience: "B.Tech Students & Freshers", price: 2999, originalPrice: 6000, isPremium: false, features: ["GST billing workflows", "Accounting templates", "Interview-ready Excel tasks"] },
+    { id: 2, title: "Excel for Data Analytics", category: "Excel", targetAudience: "B.Tech Students", price: 3499, originalPrice: 7000, isPremium: true, features: ["Pivot tables", "Dashboards", "Data cleaning practice"] },
+    { id: 3, title: "Industry-specific English for Engineers", category: "Industry English", targetAudience: "B.Tech Students", price: 2499, originalPrice: 5000, isPremium: false, features: ["Technical vocabulary", "Workplace communication", "Mock interview speaking"] },
+    { id: 4, title: "How to Speak in Technical Interviews", category: "Industry English", targetAudience: "Freshers", price: 1999, originalPrice: 4000, isPremium: false, features: ["HR answers", "Project explanation", "Confidence practice"] },
+    { id: 5, title: "Reasoning for Tech Placements", category: "Reasoning", targetAudience: "B.Tech Students", price: 3999, originalPrice: 8000, isPremium: true, features: ["Logical reasoning", "Aptitude drills", "Company pattern practice"] },
+    { id: 6, title: "Advanced Logical Reasoning", category: "Reasoning", targetAudience: "B.Tech Students", price: 2999, originalPrice: 6000, isPremium: false, features: ["Puzzles", "Critical reasoning", "Speed practice"] },
+    { id: 7, title: "Complete B.Tech Interview Prep Combo", category: "Interview Prep", targetAudience: "B.Tech Students", price: 5999, originalPrice: 14000, isPremium: true, features: ["English", "Reasoning", "Excel", "Mock interview support"] },
 ];
 
 export const BLOGS = Array.from({ length: 40 }).map((_, i) => ({

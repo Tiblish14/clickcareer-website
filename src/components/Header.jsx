@@ -1,15 +1,15 @@
 import { useState } from 'react';
-import { ChevronDown, User, ShoppingCart, Menu, X, LayoutDashboard } from 'lucide-react';
+import { ChevronDown, User, ShoppingCart, Menu, X, LayoutDashboard, LogOut } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import { cn } from '../lib/utils';
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { cart, openModal, categories } = useAppContext();
-
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+  const { isSignedIn, signOut, profile, user } = useAuth();
+  const displayName = profile?.full_name || user?.email?.split('@')[0] || 'Student';
 
   const scrollToSection = (id) => {
     setIsMobileMenuOpen(false);
@@ -54,19 +54,20 @@ export default function Header() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-6">
-            <SignedOut>
-              <SignInButton mode="modal">
-                <button className="flex items-center text-slate-700 hover:text-blue-600 font-medium text-sm transition-colors">
-                  <User className="mr-1.5 w-4 h-4" /> Sign In
-                </button>
-              </SignInButton>
-            </SignedOut>
-            <SignedIn>
+            {!isSignedIn ? (
+              <button onClick={() => openModal('auth')} className="flex items-center text-slate-700 hover:text-blue-600 font-medium text-sm transition-colors">
+                <User className="mr-1.5 w-4 h-4" /> Sign In
+              </button>
+            ) : (
+              <>
               <Link to="/dashboard" className="text-slate-700 hover:text-blue-600 font-medium text-sm transition-colors flex items-center">
                 <LayoutDashboard className="w-4 h-4 mr-1.5" /> Dashboard
               </Link>
-              <UserButton appearance={{ elements: { userButtonAvatarBox: "w-8 h-8" } }} />
-            </SignedIn>
+              <button onClick={signOut} className="flex items-center text-slate-600 hover:text-red-500 text-sm font-semibold transition-colors" title={`Signed in as ${displayName}`}>
+                <LogOut className="w-4 h-4 mr-1.5" /> Sign Out
+              </button>
+              </>
+            )}
             <button onClick={() => openModal('cart')} className="relative text-slate-700 hover:text-blue-600 transition-colors group">
               <ShoppingCart className="w-6 h-6 transform group-hover:scale-110 transition-transform" />
               {cart.length > 0 && (
@@ -100,18 +101,20 @@ export default function Header() {
           <button onClick={() => scrollToSection('courses')} className="text-left py-2 border-b border-slate-100">Courses</button>
           <button onClick={() => scrollToSection('about')} className="text-left py-2 border-b border-slate-100">Who Are We</button>
           <button onClick={() => scrollToSection('blogs')} className="text-left py-2 border-b border-slate-100">Blogs</button>
-          <SignedOut>
-            <SignInButton mode="modal">
-              <button onClick={() => setIsMobileMenuOpen(false)} className="text-left flex items-center py-2 text-blue-600 font-semibold">
-                <User className="mr-2 w-4 h-4" /> Sign In / Register
+          {!isSignedIn ? (
+            <button onClick={() => { setIsMobileMenuOpen(false); openModal('auth'); }} className="text-left flex items-center py-2 text-blue-600 font-semibold">
+              <User className="mr-2 w-4 h-4" /> Sign In / Register
+            </button>
+          ) : (
+            <>
+              <Link to="/dashboard" onClick={() => setIsMobileMenuOpen(false)} className="py-2 flex items-center text-slate-700 font-semibold">
+                <LayoutDashboard className="mr-2 w-4 h-4" /> Dashboard
+              </Link>
+              <button onClick={() => { setIsMobileMenuOpen(false); signOut(); }} className="text-left py-2 flex items-center text-red-500 font-semibold">
+                <LogOut className="mr-2 w-4 h-4" /> Sign Out
               </button>
-            </SignInButton>
-          </SignedOut>
-          <SignedIn>
-            <div className="py-2 flex items-center space-x-3">
-              <UserButton /> <span className="text-slate-700 font-semibold">My Account</span>
-            </div>
-          </SignedIn>
+            </>
+          )}
         </div>
       </div>
     </header>

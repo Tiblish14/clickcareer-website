@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useUser, useClerk } from '@clerk/clerk-react';
 import { supabase } from '../supabase';
 import { Navigate } from 'react-router-dom';
 import { BookOpen, Clock, CheckCircle } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export default function DashboardPage() {
-  const { user, isSignedIn, isLoaded } = useUser();
-  const clerk = useClerk();
+  const { user, profile, isSignedIn, loading: authLoading, signOut } = useAuth();
   const [leads, setLeads] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,12 +29,13 @@ export default function DashboardPage() {
 
     if (isSignedIn) {
       fetchLeads();
-    } else if (isLoaded) {
+    } else if (!authLoading) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setLoading(false);
     }
-  }, [user, isSignedIn, isLoaded]);
+  }, [user, isSignedIn, authLoading]);
 
-  if (!isLoaded) {
+  if (authLoading) {
     return <div className="pt-32 pb-16 text-center min-h-[60vh]">Loading...</div>;
   }
 
@@ -48,10 +48,10 @@ export default function DashboardPage() {
       <div className="flex justify-between items-center mb-10 border-b border-slate-200 pb-6">
         <div>
           <h1 className="text-3xl font-black text-slate-900 mb-2">My Dashboard</h1>
-          <p className="text-slate-500">Welcome back, {user.fullName || user.firstName}</p>
+          <p className="text-slate-500">Welcome back, {profile?.full_name || user.email}</p>
         </div>
         <button 
-          onClick={() => clerk.signOut()}
+          onClick={signOut}
           className="text-slate-500 hover:text-red-500 font-semibold px-4 py-2 border border-slate-200 rounded-lg hover:border-red-200 hover:bg-red-50 transition-colors"
         >
           Sign Out

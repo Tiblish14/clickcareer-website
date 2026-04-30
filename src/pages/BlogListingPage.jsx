@@ -1,6 +1,6 @@
 import { useAppContext } from '../context/AppContext';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Calendar, Clock, User } from 'lucide-react';
+import { ArrowRight, Calendar, User } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 
 export default function BlogListingPage() {
@@ -11,6 +11,12 @@ export default function BlogListingPage() {
       <Helmet>
         <title>Blogs & Career Insights | ClickCareer</title>
         <meta name="description" content="Read our latest articles on B.Tech placements, interview preparation, and technical skill development." />
+        <link rel="canonical" href="https://www.clickcareer.in/blogs" />
+        <meta property="og:title" content="Blogs & Career Insights | ClickCareer" />
+        <meta property="og:description" content="Read our latest articles on B.Tech placements, interview preparation, and technical skill development." />
+        <meta property="og:url" content="https://www.clickcareer.in/blogs" />
+        <meta property="og:image" content="https://www.clickcareer.in/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <div className="text-center mb-16">
         <h1 className="text-4xl md:text-5xl font-black text-slate-900 mb-6">

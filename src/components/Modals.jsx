@@ -1,14 +1,85 @@
-import { useState } from 'react';
 import { ShoppingCart, X, ArrowRight, Shield, ChevronDown } from 'lucide-react';
 import { useAppContext } from '../context/AppContext';
 import { cn } from '../lib/utils';
+import { useAuth } from '../context/AuthContext';
+import { supabase } from '../supabase';
+import { useState } from 'react';
 
 export default function Modals() {
-  const { modals, closeModal, cart, removeFromCart, clearCart, activeBlogId, blogs, categories } = useAppContext();
-  
+  const { modals, closeModal, cart, removeFromCart, activeBlogId, blogs, categories } = useAppContext();
+  const { signIn, signUp } = useAuth();
+  const [authMode, setAuthMode] = useState('signin');
+  const [authMessage, setAuthMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Blog Content
   const activeBlog = blogs.find(b => b.id === activeBlogId);
+
+  const handleAuthSubmit = async (event) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    setAuthMessage('');
+    setIsSubmitting(true);
+
+    const email = form.get('email');
+    const password = form.get('password');
+    const fullName = form.get('fullName');
+
+    const { error } = authMode === 'signin'
+      ? await signIn({ email, password })
+      : await signUp({ email, password, fullName });
+
+    setIsSubmitting(false);
+
+    if (error) {
+      setAuthMessage(error.message);
+      return;
+    }
+
+    setAuthMessage(authMode === 'signin' ? 'Signed in successfully.' : 'Account created. Please verify your email if Supabase asks for confirmation.');
+    closeModal('auth');
+  };
+
+  const handleDemoSubmit = async (event) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const { error } = await supabase.from('demo_requests').insert({
+      full_name: form.get('fullName'),
+      phone: form.get('phone'),
+      email: form.get('email'),
+      subject: form.get('subject'),
+    });
+
+    if (error) {
+      alert(`Could not save demo request: ${error.message}`);
+      return;
+    }
+
+    event.currentTarget.reset();
+    alert('Demo booked successfully! We will contact you soon.');
+    closeModal('demo');
+  };
+
+  const handlePartnerSubmit = async (event) => {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const { error } = await supabase.from('partner_requests').insert({
+      organization_name: form.get('organizationName'),
+      contact_person: form.get('contactPerson'),
+      phone: form.get('phone'),
+      email: form.get('email'),
+      partnership_type: form.get('partnershipType'),
+    });
+
+    if (error) {
+      alert(`Could not save partner request: ${error.message}`);
+      return;
+    }
+
+    event.currentTarget.reset();
+    alert('Partnership request submitted successfully! Our team will reach out shortly.');
+    closeModal('partner');
+  };
 
   return (
     <>
@@ -76,6 +147,43 @@ export default function Modals() {
         </div>
       </div>
 
+      {/* Auth Modal */}
+      <div className={cn(
+        "fixed inset-0 z-[70] flex items-center justify-center p-4 transition-all duration-300",
+        modals.auth ? "visible opacity-100" : "invisible opacity-0 pointer-events-none"
+      )}>
+        <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => closeModal('auth')}></div>
+        <div className={cn(
+          "bg-white rounded-3xl shadow-2xl w-full max-w-md overflow-hidden relative transition-transform duration-300",
+          modals.auth ? "scale-100 translate-y-0" : "scale-95 translate-y-4"
+        )}>
+          <button onClick={() => closeModal('auth')} className="absolute top-4 right-4 text-slate-400 hover:text-slate-800 bg-slate-100 rounded-full p-1"><X className="w-5 h-5" /></button>
+          <div className="p-8">
+            <h2 className="text-3xl font-black mb-2">{authMode === 'signin' ? 'Welcome Back' : 'Create Account'}</h2>
+            <p className="text-slate-500 mb-6">Use Supabase authentication to access your course dashboard.</p>
+
+            <form onSubmit={handleAuthSubmit} className="space-y-4">
+              {authMode === 'signup' && (
+                <input name="fullName" required type="text" placeholder="Full Name" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+              )}
+              <input name="email" required type="email" placeholder="Email Address" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+              <input name="password" required type="password" minLength={6} placeholder="Password" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+              {authMessage && <p className="text-sm text-orange-600">{authMessage}</p>}
+              <button disabled={isSubmitting} type="submit" className="w-full bg-blue-600 text-white font-bold py-3 rounded-xl shadow-md shadow-blue-600/20 hover:bg-blue-700 transition-colors mt-4 disabled:opacity-60">
+                {isSubmitting ? 'Please wait...' : authMode === 'signin' ? 'Sign In' : 'Sign Up'}
+              </button>
+            </form>
+
+            <button
+              onClick={() => { setAuthMode(authMode === 'signin' ? 'signup' : 'signin'); setAuthMessage(''); }}
+              className="mt-6 text-sm text-blue-600 font-semibold hover:underline"
+            >
+              {authMode === 'signin' ? "Don't have an account? Sign up" : 'Already have an account? Sign in'}
+            </button>
+          </div>
+        </div>
+      </div>
+
 
 
       {/* Demo Modal */}
@@ -93,12 +201,12 @@ export default function Modals() {
             <h2 className="text-3xl font-black mb-2">Book Free Demo</h2>
             <p className="text-slate-500 mb-6">Schedule your 15-minute free demo session.</p>
             
-            <form onSubmit={(e) => { e.preventDefault(); alert('Demo booked successfully!'); closeModal('demo'); }} className="space-y-4">
-              <input required type="text" placeholder="Full Name" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
-              <input required type="tel" placeholder="Mobile Number" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
-              <input required type="email" placeholder="Email Address" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+            <form onSubmit={handleDemoSubmit} className="space-y-4">
+              <input name="fullName" required type="text" placeholder="Full Name" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+              <input name="phone" required type="tel" placeholder="Mobile Number" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+              <input name="email" required type="email" placeholder="Email Address" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
               <div className="relative">
-                <select required defaultValue="" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none text-slate-700 bg-white appearance-none">
+                <select name="subject" required defaultValue="" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none text-slate-700 bg-white appearance-none">
                   <option value="" disabled>Select Subject for Demo</option>
                   {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
                 </select>
@@ -127,13 +235,13 @@ export default function Modals() {
             <h2 className="text-3xl font-black mb-2">Partner with Us</h2>
             <p className="text-slate-500 mb-6">Let's collaborate to upskill your students or team.</p>
             
-            <form onSubmit={(e) => { e.preventDefault(); alert('Request submitted successfully!'); closeModal('partner'); }} className="space-y-4">
-              <input required type="text" placeholder="Organization/College Name" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
-              <input required type="text" placeholder="Contact Person" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
-              <input required type="tel" placeholder="Mobile Number" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
-              <input required type="email" placeholder="Official Email Address" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+            <form onSubmit={handlePartnerSubmit} className="space-y-4">
+              <input name="organizationName" required type="text" placeholder="Organization/College Name" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+              <input name="contactPerson" required type="text" placeholder="Contact Person" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+              <input name="phone" required type="tel" placeholder="Mobile Number" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
+              <input name="email" required type="email" placeholder="Official Email Address" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none" />
               <div className="relative">
-                <select required defaultValue="" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none text-slate-700 bg-white appearance-none">
+                <select name="partnershipType" required defaultValue="" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-600 outline-none text-slate-700 bg-white appearance-none">
                   <option value="" disabled>Partnership Type</option>
                   <option value="College Training">College Campus Training</option>
                   <option value="Corporate Training">Corporate Team Upskilling</option>

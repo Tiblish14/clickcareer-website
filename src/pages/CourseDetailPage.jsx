@@ -1,20 +1,20 @@
 import { useParams, Link } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import { ArrowLeft, CheckCircle, Shield, Play } from 'lucide-react';
-import { useUser, useClerk } from '@clerk/clerk-react';
 import { supabase } from '../supabase';
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useAuth } from '../context/AuthContext';
 
 export default function CourseDetailPage() {
   const { slug } = useParams();
-  const { courses } = useAppContext();
-  const { user, isSignedIn } = useUser();
-  const clerk = useClerk();
+  const { courses, openModal } = useAppContext();
+  const { user, isSignedIn } = useAuth();
   const [isProcessing, setIsProcessing] = useState(false);
   
   // For now, using ID as slug from mockData
   const course = courses.find(c => c.id.toString() === slug || (c.slug && c.slug.current === slug));
+  const courseUrl = `https://www.clickcareer.in/courses/${slug}`;
 
   if (!course) {
     return (
@@ -33,15 +33,17 @@ export default function CourseDetailPage() {
           course_id: course.id
         });
       }
-      clerk.openSignIn();
+      openModal('auth');
     } else {
       setIsProcessing(true);
+      // eslint-disable-next-line react-hooks/purity
       const leadId = 'LID' + Math.floor(1000 + Math.random() * 9000);
       
       // Store lead in Supabase
       const { error } = await supabase.from('leads').insert({
         id: leadId,
         user_id: user.id,
+        user_email: user.email,
         course_id: course.id.toString(),
         course_title: course.title,
         status: 'pending'
@@ -74,8 +76,12 @@ export default function CourseDetailPage() {
       <Helmet>
         <title>{course.title} | ClickCareer</title>
         <meta name="description" content={`Enroll in ${course.title} and crack your technical interviews with ClickCareer.`} />
+        <link rel="canonical" href={courseUrl} />
         <meta property="og:title" content={`${course.title} | ClickCareer`} />
         <meta property="og:description" content={`Enroll in ${course.title} and crack your technical interviews with ClickCareer.`} />
+        <meta property="og:url" content={courseUrl} />
+        <meta property="og:image" content="https://www.clickcareer.in/og-image.jpg" />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <Link to="/courses" className="inline-flex items-center text-slate-500 hover:text-blue-600 mb-8 transition-colors">
         <ArrowLeft className="w-4 h-4 mr-2" /> Back to all courses

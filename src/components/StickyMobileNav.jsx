@@ -6,7 +6,7 @@ export default function StickyMobileNav() {
   return (
     <div className="md:hidden fixed bottom-0 w-full bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-40 flex px-4 py-3 justify-between items-center pb-safe">
       <select 
-        onChange={(e) => {
+        onChange={() => {
             // Can be extended to update a global active tab if needed
             document.getElementById('courses').scrollIntoView({behavior: 'smooth'})
         }} 
